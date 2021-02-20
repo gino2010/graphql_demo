@@ -84,11 +84,6 @@
     </dependencies>
 
     <build>
-        <!--        <resources>-->
-        <!--            <resource>-->
-        <!--                <directory>target/generated-sources/java</directory>-->
-        <!--            </resource>-->
-        <!--        </resources>-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
