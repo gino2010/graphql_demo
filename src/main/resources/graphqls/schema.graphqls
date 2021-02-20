@@ -1,0 +1,37 @@
+scalar DateTime
+scalar BigDecimal
+
+type DepositOrder implements OrderBase{
+    id: ID!
+    type: String
+    time: DateTime
+    amount: BigDecimal
+    rate: Float
+}
+
+type NormalOrder implements OrderBase{
+    id: ID!
+    type: String
+    time: DateTime
+    amount: BigDecimal
+}
+
+input InputOrder{
+    type: String
+    amount: BigDecimal
+}
+
+interface OrderBase{
+    id: ID!
+    type: String
+    time: DateTime
+}
+
+type Query {
+    Order: [OrderBase!]!
+}
+
+type Mutation {
+    createOrder(order: InputOrder): OrderBase!
+    updateOrderStatus(orderId: String, status: String): OrderBase
+}
