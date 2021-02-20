@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "09b2815c-0e37-4398-a292-e9d6b12f8fb6",
+		"name": "graphql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "QueryOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Order {\n  Order {\n    ... on DepositOrder {\n      __typename\n      id\n      type\n      time\n      amount\n      rate\n    }\n    ... on NormalOrder {\n      __typename\n      id\n      type\n      time\n      amount\n    }\n  }\n}\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation createOrder($inputOrder: InputOrder){\n    createOrder(order: $inputOrder){\n        ... on DepositOrder{\n            id\n            type\n            time\n            amount\n            rate\n        }\n    }\n}",
+						"variables": "{\n    \"inputOrder\":{\n        \"type\": \"deposit\",\n        \"amount\": 100\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation updateOrderStatus($orderId: String, $status: String){\n    updateOrderStatus(orderId: $orderId, status: $status){\n        ... on NormalOrder{\n            id\n            type\n            time\n            amount\n        }\n    }\n}",
+						"variables": "{\n    \"orderId\": \"1\",\n    \"status\": \"open\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
